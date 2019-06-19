@@ -53,6 +53,8 @@ public class QuerstionController {
 		User sessionUser = (User) session.getAttribute("user");
 		Question question = questionService.getQuestionById(id);
 		User writer = question.getWriter();
+		if(sessionUser == null)
+			return "redirect:/users/login-form";
 		if(sessionUser.equals(writer))
 			model.addAttribute("same", "같다");
 		model.addAttribute("question", question);
